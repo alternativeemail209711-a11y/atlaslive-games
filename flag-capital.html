@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Flag → Capital — AtlasLive</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <a class="back-link" href="../index.html">← Hub</a>
+    <div class="mode-pill test" id="modePill">
+      <span class="dot"></span><span id="modeLabel">Test Mode</span>
+    </div>
+  </div>
+
+  <div class="contour"></div>
+
+  <!-- ============ ROUND SCREEN ============ -->
+  <div id="roundScreen" class="card">
+    <div class="round-header">
+      <div class="round-tier" id="roundTierLabel">EXPLORER · 20 PTS</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="timer" id="timer">0:30</div>
+        <button class="gear-btn" id="gearBtn">⚙</button>
+      </div>
+    </div>
+
+    <div class="medallion-wrap">
+      <div class="medallion"><div class="flag" id="flagDisplay">🏳️</div></div>
+    </div>
+
+    <p class="prompt">What's the capital of this country?</p>
+    <p class="prompt-sub" id="hintsLeftLabel">2 hints available</p>
+
+    <div class="hint-row" id="hintRow"></div>
+    <div class="hint-display" id="hintDisplay"></div>
+
+    <div class="gift-boost hidden" id="giftBoost">
+      <span class="label">🎁 Gift received — trigger a shared boost for everyone</span>
+      <button id="giftBoostBtn">Reveal letter</button>
+    </div>
+
+    <div class="section-label">HOST CHECK — type an answer to test it yourself</div>
+    <div class="winner-row">
+      <input type="text" id="hostAnswerInput" placeholder="Type an answer to check it">
+      <button class="award-btn" id="checkAnswerBtn" style="background:var(--gold);color:#1A1204;">Check</button>
+    </div>
+    <div class="hint-display" id="hostCheckFeedback"></div>
+
+    <div id="awardSection">
+      <div class="section-label">AWARD THE WINNER</div>
+      <div class="winner-row">
+        <input type="text" id="winnerName" placeholder="Viewer's name (whoever got it right)">
+        <button class="award-btn" id="awardBtn">Award</button>
+      </div>
+      <div class="error-flash" id="awardError"></div>
+    </div>
+
+    <button class="reveal-btn" id="revealBtn">No one got it — show the answer</button>
+    <div class="answer-reveal hidden" id="answerReveal"></div>
+
+    <button class="next-btn" id="nextBtn">Next Round →</button>
+  </div>
+
+  <!-- ============ SCOREBOARD ============ -->
+  <div class="board">
+    <div class="board-tabs-row">
+      <div class="board-tabs" style="flex:1;">
+        <div class="board-tab active" data-tab="round" id="tabRound">This Round's Top 10</div>
+        <div class="board-tab" data-tab="total" id="tabTotal">All-Time Total</div>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:14px; margin-bottom:8px;">
+      <span class="reset-link" id="resetRoundBtn">Reset this round's board</span>
+      <span class="reset-link" id="resetTotalBtn">Reset all-time total</span>
+    </div>
+    <div class="board-list" id="boardList"></div>
+  </div>
+
+  <div class="rules-toggle" id="rulesToggle">How to play & how points work</div>
+  <div class="rules-panel hidden" id="rulesPanel">
+    <h4>Flag → Capital</h4>
+    <p>Only a country's flag is shown — never its name. Figure out the country from the flag, then comment the name of its <strong>capital city</strong>.</p>
+    <ul>
+      <li><strong>Rookie</strong> — well-known countries, 10 pts, 3 hints available.</li>
+      <li><strong>Explorer</strong> — moderately known, 20 pts, 2 hints available.</li>
+      <li><strong>Globetrotter</strong> — tricky ones, 30 pts, 2 hints available.</li>
+    </ul>
+    <p>Each hint you reveal lowers the round's value slightly. In <strong>Live Mode</strong>, type the winning viewer's name and tap Award. In <strong>Offline Mode</strong>, type your own guess directly — a correct guess auto-awards your solo score.</p>
+    <p><strong>Gifts:</strong> a gift doesn't hand any one viewer an advantage — it unlocks one shared boost for the whole chat, like an extra letter reveal.</p>
+    <p>Tap the <strong>⚙</strong> icon any time to change difficulty, mode, or timer length — your choice carries over automatically to every future round until you change it again.</p>
+  </div>
+
+</div>
+
+<!-- ============ SETTINGS MODAL ============ -->
+<div class="modal-overlay hidden" id="settingsModal">
+  <div class="modal-sheet">
+    <div class="modal-title">Settings</div>
+
+    <div class="section-label">MODE</div>
+    <div class="tier-grid mode-grid-3" id="modeGrid">
+      <div class="tier-btn" data-mode="test"><span class="tname">Test</span><span class="tpts">rehearse</span></div>
+      <div class="tier-btn" data-mode="live"><span class="tname">Live</span><span class="tpts">on stream</span></div>
+      <div class="tier-btn" data-mode="offline"><span class="tname">Offline</span><span class="tpts">solo play</span></div>
+    </div>
+
+    <div class="section-label">DIFFICULTY</div>
+    <div class="tier-grid" id="tierGrid"></div>
+
+    <div class="field-row">
+      <div>
+        <div class="flabel">Round timer</div>
+        <div class="fsub">Seconds per round</div>
+      </div>
+      <div class="stepper">
+        <button id="timerMinus">−</button>
+        <span class="sval" id="timerVal">30</span>
+        <button id="timerPlus">+</button>
+      </div>
+    </div>
+
+    <button class="modal-close" id="closeSettings">Done</button>
+  </div>
+</div>
+
+<script src="../data.js"></script>
+<script src="../shared.js"></script>
+<script src="flag-capital.js"></script>
+</body>
+</html>

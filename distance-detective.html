@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Distance Detective — AtlasLive</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <a class="back-link" href="../index.html">← Hub</a>
+    <div class="mode-pill test" id="modePill">
+      <span class="dot"></span><span id="modeLabel">Test Mode</span>
+    </div>
+  </div>
+
+  <div class="contour"></div>
+
+  <!-- ============ ROUND SCREEN ============ -->
+  <div id="roundScreen" class="card">
+    <div class="round-header">
+      <div class="round-tier" id="roundTierLabel">EXPLORER · 20 PTS</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="timer" id="timer">1:30</div>
+        <button class="gear-btn" id="gearBtn">⚙</button>
+      </div>
+    </div>
+
+    <div class="medallion-wrap">
+      <div class="medallion"><div class="flag" id="compassIcon" style="font-size:64px;">🧭</div></div>
+    </div>
+
+    <p class="prompt">Guess the secret country</p>
+    <p class="prompt-sub" id="guessCountLabel">0 guesses so far — I'll tell you distance & direction</p>
+
+    <div class="hint-row" id="hintRow"></div>
+    <div class="hint-display" id="hintDisplay"></div>
+
+    <div class="gift-boost hidden" id="giftBoost">
+      <span class="label">🎁 Gift received — trigger a shared boost for everyone</span>
+      <button id="giftBoostBtn">Narrow the region</button>
+    </div>
+
+    <div class="section-label" id="guessSectionLabel">NEW GUESS</div>
+    <div class="winner-row">
+      <input type="text" id="guessCountryInput" list="countryList" placeholder="Type a country name">
+      <button class="award-btn" id="submitGuessBtn">Guess</button>
+    </div>
+    <div class="winner-row hidden" id="guessedByRow">
+      <input type="text" id="guessedByInput" placeholder="Guessed by (viewer's name)">
+    </div>
+    <div class="error-flash" id="guessError"></div>
+    <datalist id="countryList"></datalist>
+
+    <div class="guess-history" id="guessHistory"></div>
+
+    <button class="reveal-btn" id="revealBtn">No one got it — show the answer</button>
+    <div class="answer-reveal hidden" id="answerReveal"></div>
+
+    <button class="next-btn" id="nextBtn">Next Round →</button>
+  </div>
+
+  <!-- ============ SCOREBOARD ============ -->
+  <div class="board">
+    <div class="board-tabs-row">
+      <div class="board-tabs" style="flex:1;">
+        <div class="board-tab active" data-tab="round" id="tabRound">This Round's Top 10</div>
+        <div class="board-tab" data-tab="total" id="tabTotal">All-Time Total</div>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:14px; margin-bottom:8px;">
+      <span class="reset-link" id="resetRoundBtn">Reset this round's board</span>
+      <span class="reset-link" id="resetTotalBtn">Reset all-time total</span>
+    </div>
+    <div class="board-list" id="boardList"></div>
+  </div>
+
+  <div class="rules-toggle" id="rulesToggle">How to play & how points work</div>
+  <div class="rules-panel hidden" id="rulesPanel">
+    <h4>Distance Detective</h4>
+    <p>There's a secret country. Type any country name to guess it — you'll be told how far away (in km) and which direction (N/NE/E/SE/S/SW/W/NW) the real country is from your guess. Use that to narrow in.</p>
+    <ul>
+      <li><strong>Rookie</strong> — well-known countries, 10 pts, 3 hints available.</li>
+      <li><strong>Explorer</strong> — moderately known, 20 pts, 2 hints available.</li>
+      <li><strong>Globetrotter</strong> — tricky ones, 30 pts, 2 hints available.</li>
+    </ul>
+    <p>Points start at the tier value and drop slightly with each wrong guess and each hint used, so faster is worth more. In <strong>Live Mode</strong>, fill in "Guessed by" before submitting the correct country so the win is logged to the right viewer. In <strong>Offline Mode</strong>, just guess for yourself.</p>
+    <p><strong>Gifts:</strong> unlock a shared boost (narrows the region for everyone) rather than helping one viewer alone.</p>
+  </div>
+
+</div>
+
+<!-- ============ SETTINGS MODAL ============ -->
+<div class="modal-overlay hidden" id="settingsModal">
+  <div class="modal-sheet">
+    <div class="modal-title">Settings</div>
+
+    <div class="section-label">MODE</div>
+    <div class="tier-grid mode-grid-3" id="modeGrid">
+      <div class="tier-btn" data-mode="test"><span class="tname">Test</span><span class="tpts">rehearse</span></div>
+      <div class="tier-btn" data-mode="live"><span class="tname">Live</span><span class="tpts">on stream</span></div>
+      <div class="tier-btn" data-mode="offline"><span class="tname">Offline</span><span class="tpts">solo play</span></div>
+    </div>
+
+    <div class="section-label">DIFFICULTY</div>
+    <div class="tier-grid" id="tierGrid"></div>
+
+    <div class="field-row">
+      <div>
+        <div class="flabel">Round timer</div>
+        <div class="fsub">Seconds per round</div>
+      </div>
+      <div class="stepper">
+        <button id="timerMinus">−</button>
+        <span class="sval" id="timerVal">90</span>
+        <button id="timerPlus">+</button>
+      </div>
+    </div>
+
+    <button class="modal-close" id="closeSettings">Done</button>
+  </div>
+</div>
+
+<script src="../data.js"></script>
+<script src="../shared.js"></script>
+<script src="distance-detective.js"></script>
+</body>
+</html>

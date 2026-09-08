@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Flag & Capital — Live Game</title>
+<title>AtlasLive — Game Hub</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,95 +11,119 @@
 
   <div class="topbar">
     <div class="brand">Atlas<span>Live</span></div>
-    <div class="mode-pill test" id="modePill">
-      <span class="dot"></span><span id="modeLabel">Test Mode</span>
-    </div>
   </div>
 
   <div class="contour"></div>
 
-  <!-- ============ SETUP SCREEN ============ -->
-  <div id="setupScreen" class="card">
-    <div class="section-label">GAME · FLAG → CAPITAL</div>
-    <p class="helper-text" style="margin-top:0;">Only the flag shows. Viewers have to work out the country, then comment its capital.</p>
+  <p class="hub-intro">Pick a game to run. Your mode (Test / Live / Offline) and each game's difficulty are remembered automatically, so you won't have to reset them mid-stream.</p>
 
-    <div class="section-label">DIFFICULTY</div>
-    <div class="tier-grid" id="tierGrid"></div>
+  <div class="category-heading">GEOGRAPHY</div>
 
-    <div class="section-label">MODE</div>
-    <div class="tier-grid" style="grid-template-columns:1fr 1fr;">
-      <div class="tier-btn active" data-mode="test" id="btnTest">
-        <span class="tname">Test</span>
-        <span class="tpts">practice run</span>
-      </div>
-      <div class="tier-btn" data-mode="live" id="btnLive">
-        <span class="tname">Live</span>
-        <span class="tpts">counts on scoreboard</span>
-      </div>
+  <a class="game-card" href="games/flag-capital.html">
+    <div class="emoji">🚩</div>
+    <div class="info">
+      <div class="gcategory">FLAG → CAPITAL</div>
+      <div class="gname">Flag → Capital</div>
+      <div class="gdesc">Only the flag shows — guess the country, then its capital.</div>
     </div>
+  </a>
 
-    <button class="start-btn" id="startBtn">Start Round</button>
+  <a class="game-card" href="games/distance-detective.html">
+    <div class="emoji">🧭</div>
+    <div class="info">
+      <div class="gcategory">DISTANCE & DIRECTION</div>
+      <div class="gname">Distance Detective</div>
+      <div class="gdesc">Guess countries one at a time — each guess reveals distance and direction to the secret country.</div>
+    </div>
+  </a>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">🏴</div>
+    <div class="info">
+      <div class="gcategory">FLAG ZOOM</div>
+      <div class="gname">Flagle-style Zoom Reveal</div>
+      <div class="gdesc">Building next — flag starts zoomed in and widens each hint.</div>
+    </div>
   </div>
 
-  <!-- ============ ROUND SCREEN ============ -->
-  <div id="roundScreen" class="card hidden">
-    <div class="round-header">
-      <div class="round-tier" id="roundTierLabel">EXPLORER · 20 PTS</div>
-      <div class="timer" id="timer">0:30</div>
+  <div class="game-card coming-soon">
+    <div class="emoji">🏙️</div>
+    <div class="info">
+      <div class="gcategory">CITY GUESSING</div>
+      <div class="gname">City Detective</div>
+      <div class="gdesc">Same distance/direction mechanic, for famous cities.</div>
     </div>
-
-    <div class="medallion-wrap">
-      <div class="medallion"><div class="flag" id="flagDisplay">🏳️</div></div>
-    </div>
-
-    <p class="prompt">What's the capital of this country?</p>
-    <p class="prompt-sub" id="hintsLeftLabel">3 hints available</p>
-
-    <div class="hint-row" id="hintRow"></div>
-    <div class="hint-display" id="hintDisplay"></div>
-
-    <div class="gift-boost hidden" id="giftBoost">
-      <span class="label">🎁 Gift received — trigger a shared boost for everyone</span>
-      <button id="giftBoostBtn">Reveal letter</button>
-    </div>
-
-    <div class="winner-row">
-      <input type="text" id="winnerName" placeholder="Viewer's name (whoever got it right)">
-      <button class="award-btn" id="awardBtn">Award</button>
-    </div>
-
-    <button class="reveal-btn" id="revealBtn">No one got it — show the answer</button>
-    <div class="answer-reveal hidden" id="answerReveal"></div>
-
-    <button class="next-btn" id="nextBtn">Next Round →</button>
   </div>
 
-  <!-- ============ SCOREBOARD ============ -->
-  <div class="board">
-    <div class="board-tabs">
-      <div class="board-tab active" data-tab="round" id="tabRound">This Round's Top 10</div>
-      <div class="board-tab" data-tab="total" id="tabTotal">All-Time Total</div>
+  <div class="game-card coming-soon">
+    <div class="emoji">🗺️</div>
+    <div class="info">
+      <div class="gcategory">COUNTRY CLUES</div>
+      <div class="gname">Countryle</div>
+      <div class="gdesc">Guess the country from population, continent and border clues, Wordle-style.</div>
     </div>
-    <div class="board-list" id="boardList"></div>
   </div>
 
-  <div class="rules-toggle" id="rulesToggle">How to play & how points work</div>
-  <div class="rules-panel hidden" id="rulesPanel">
-    <h4>Flag → Capital</h4>
-    <p>Only a country's flag is shown — never its name. Figure out the country from the flag, then comment the name of its <strong>capital city</strong>.</p>
-    <ul>
-      <li><strong>Rookie</strong> — well-known countries, 10 pts, 3 hints available.</li>
-      <li><strong>Explorer</strong> — moderately known, 20 pts, 2 hints available.</li>
-      <li><strong>Globetrotter</strong> — tricky ones, 30 pts, 2 hints available.</li>
-    </ul>
-    <p>Each hint you reveal lowers the round's value slightly — first correct comment the host sees wins the round. Type that viewer's name in the box and tap <strong>Award</strong> to log it.</p>
-    <p><strong>Gifts:</strong> a gift doesn't hand any one viewer an advantage. Instead it unlocks one shared boost for the whole chat — like an extra letter reveal — so it helps everyone equally.</p>
-    <p><strong>Test Mode</strong> runs the exact same game without saving anything to the scoreboards, so you can rehearse freely before going live.</p>
+  <div class="game-card coming-soon">
+    <div class="emoji">🧳</div>
+    <div class="info">
+      <div class="gcategory">BORDER HOPPING</div>
+      <div class="gname">Travle</div>
+      <div class="gdesc">Chart a path of neighboring countries from a start to a destination.</div>
+    </div>
   </div>
+
+  <div class="category-heading">WORDS</div>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">🔤</div>
+    <div class="info">
+      <div class="gcategory">WORD BUILDING</div>
+      <div class="gname">Word500-style</div>
+      <div class="gdesc">Build as many valid words as possible from a letter set.</div>
+    </div>
+  </div>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">🌸</div>
+    <div class="info">
+      <div class="gcategory">FLOWER OF LETTERS</div>
+      <div class="gname">Blossom-style</div>
+      <div class="gdesc">Six petals, one center letter — find words that all use the center.</div>
+    </div>
+  </div>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">🔍</div>
+    <div class="info">
+      <div class="gcategory">GRID SEARCH</div>
+      <div class="gname">Word Search</div>
+      <div class="gdesc">Find hidden words in a letter grid — algebraic-notation answers.</div>
+    </div>
+  </div>
+
+  <div class="category-heading">NUMBERS</div>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">🔢</div>
+    <div class="info">
+      <div class="gcategory">CLASSIC GRID</div>
+      <div class="gname">Sudoku</div>
+      <div class="gdesc">Classic 9×9, algebraic-notation answers, three difficulty tiers.</div>
+    </div>
+  </div>
+
+  <div class="game-card coming-soon">
+    <div class="emoji">➕</div>
+    <div class="info">
+      <div class="gcategory">SUM GRID</div>
+      <div class="gname">Kakuro</div>
+      <div class="gdesc">Cross-sum puzzle grid with algebraic-notation answers.</div>
+    </div>
+  </div>
+
+  <p class="hub-intro" style="margin-top:22px;">More games are added to this hub as we finish building them — nothing to reinstall, the same link always has the latest set.</p>
 
 </div>
-
-<script src="data.js"></script>
-<script src="app.js"></script>
 </body>
 </html>
