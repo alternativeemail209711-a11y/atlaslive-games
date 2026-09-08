@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Flag & Capital — Live Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">Atlas<span>Live</span></div>
+    <div class="mode-pill test" id="modePill">
+      <span class="dot"></span><span id="modeLabel">Test Mode</span>
+    </div>
+  </div>
+
+  <div class="contour"></div>
+
+  <!-- ============ SETUP SCREEN ============ -->
+  <div id="setupScreen" class="card">
+    <div class="section-label">GAME · FLAG → CAPITAL</div>
+    <p class="helper-text" style="margin-top:0;">Only the flag shows. Viewers have to work out the country, then comment its capital.</p>
+
+    <div class="section-label">DIFFICULTY</div>
+    <div class="tier-grid" id="tierGrid"></div>
+
+    <div class="section-label">MODE</div>
+    <div class="tier-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="tier-btn active" data-mode="test" id="btnTest">
+        <span class="tname">Test</span>
+        <span class="tpts">practice run</span>
+      </div>
+      <div class="tier-btn" data-mode="live" id="btnLive">
+        <span class="tname">Live</span>
+        <span class="tpts">counts on scoreboard</span>
+      </div>
+    </div>
+
+    <button class="start-btn" id="startBtn">Start Round</button>
+  </div>
+
+  <!-- ============ ROUND SCREEN ============ -->
+  <div id="roundScreen" class="card hidden">
+    <div class="round-header">
+      <div class="round-tier" id="roundTierLabel">EXPLORER · 20 PTS</div>
+      <div class="timer" id="timer">0:30</div>
+    </div>
+
+    <div class="medallion-wrap">
+      <div class="medallion"><div class="flag" id="flagDisplay">🏳️</div></div>
+    </div>
+
+    <p class="prompt">What's the capital of this country?</p>
+    <p class="prompt-sub" id="hintsLeftLabel">3 hints available</p>
+
+    <div class="hint-row" id="hintRow"></div>
+    <div class="hint-display" id="hintDisplay"></div>
+
+    <div class="gift-boost hidden" id="giftBoost">
+      <span class="label">🎁 Gift received — trigger a shared boost for everyone</span>
+      <button id="giftBoostBtn">Reveal letter</button>
+    </div>
+
+    <div class="winner-row">
+      <input type="text" id="winnerName" placeholder="Viewer's name (whoever got it right)">
+      <button class="award-btn" id="awardBtn">Award</button>
+    </div>
+
+    <button class="reveal-btn" id="revealBtn">No one got it — show the answer</button>
+    <div class="answer-reveal hidden" id="answerReveal"></div>
+
+    <button class="next-btn" id="nextBtn">Next Round →</button>
+  </div>
+
+  <!-- ============ SCOREBOARD ============ -->
+  <div class="board">
+    <div class="board-tabs">
+      <div class="board-tab active" data-tab="round" id="tabRound">This Round's Top 10</div>
+      <div class="board-tab" data-tab="total" id="tabTotal">All-Time Total</div>
+    </div>
+    <div class="board-list" id="boardList"></div>
+  </div>
+
+  <div class="rules-toggle" id="rulesToggle">How to play & how points work</div>
+  <div class="rules-panel hidden" id="rulesPanel">
+    <h4>Flag → Capital</h4>
+    <p>Only a country's flag is shown — never its name. Figure out the country from the flag, then comment the name of its <strong>capital city</strong>.</p>
+    <ul>
+      <li><strong>Rookie</strong> — well-known countries, 10 pts, 3 hints available.</li>
+      <li><strong>Explorer</strong> — moderately known, 20 pts, 2 hints available.</li>
+      <li><strong>Globetrotter</strong> — tricky ones, 30 pts, 2 hints available.</li>
+    </ul>
+    <p>Each hint you reveal lowers the round's value slightly — first correct comment the host sees wins the round. Type that viewer's name in the box and tap <strong>Award</strong> to log it.</p>
+    <p><strong>Gifts:</strong> a gift doesn't hand any one viewer an advantage. Instead it unlocks one shared boost for the whole chat — like an extra letter reveal — so it helps everyone equally.</p>
+    <p><strong>Test Mode</strong> runs the exact same game without saving anything to the scoreboards, so you can rehearse freely before going live.</p>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
